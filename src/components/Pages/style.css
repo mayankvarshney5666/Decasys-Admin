@@ -1,0 +1,21 @@
+/* styles.css */
+.froala-editor-wrapper .fr-box {
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+    padding: 10px;
+    height: 200px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.froala-editor-placeholder {
+    color: #aaa;
+}
+
+.fr-box {
+    border: 2px solid #ccc;
+}
