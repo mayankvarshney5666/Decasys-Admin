@@ -45,7 +45,7 @@ function UpdateProduct() {
       newInputs[index] = { ...newInputs[index], price: value };
     } else if (name.startsWith('discountPrice')) {
       newInputs[index] = { ...newInputs[index], discountPrice: value };
-    }else if (name.startsWith('ShippingWeight')) {
+    } else if (name.startsWith('ShippingWeight')) {
       newInputs[index] = { ...newInputs[index], ShippingWeight: value };
     }
 
@@ -55,7 +55,7 @@ function UpdateProduct() {
 
   // Function to handle "Add More" button click
   const handleAddMore = () => {
-    setInputs([...inputs, { weight: '', price: '', discountPrice: '', ShippingWeight:'' }]);
+    setInputs([...inputs, { weight: '', price: '', discountPrice: '', ShippingWeight: '' }]);
   };
 
   const RemoveItem = (index) => {
@@ -143,46 +143,48 @@ function UpdateProduct() {
     myForm.set("brand", leaddata.brand);
     myForm.set("Stock", leaddata.Stock);
     myForm.set("sku", leaddata.sku);
-  ////extra 
-       if (leaddata) {
+    ////extra 
+    if (leaddata) {
       if (leaddata.hasOwnProperty('metaDes')) {
-          myForm.set("metaDes", leaddata.metaDes);
+        myForm.set("metaDes", leaddata.metaDes);
       }
       if (leaddata.hasOwnProperty('metaKey')) {
-          myForm.set("metaKey", leaddata.metaKey);
+        myForm.set("metaKey", leaddata.metaKey);
       }
       if (leaddata.hasOwnProperty('metaTitle')) {
-          myForm.set("metaTitle", leaddata.metaTitle);
+        myForm.set("metaTitle", leaddata.metaTitle);
       }
       if (leaddata.hasOwnProperty('UPCCode')) {
-          myForm.set("UPCCode", leaddata.UPCCode);
+        myForm.set("UPCCode", leaddata.UPCCode);
       }
       if (leaddata.hasOwnProperty('ProductCode')) {
-          myForm.set("ProductCode", leaddata.ProductCode);
+        myForm.set("ProductCode", leaddata.ProductCode);
       }
       if (leaddata.hasOwnProperty('bestbefore')) {
-          myForm.set("bestbefore", leaddata.bestbefore);
+        myForm.set("bestbefore", leaddata.bestbefore);
       }
-  }
+    }
     ////extra  
 
     myForm.set("subcategory", leaddata.subcategory);
     myForm.set("description", leaddata.description);
     myForm.set("ProductOverviewDiscription", leaddata.ProductOverviewDiscription);
     myForm.set("SupplimentFacts", leaddata.SupplimentFacts);
-    
+
     // Convert the inputs array to a suitable format for form submission
-    const weightPrices = inputs.map(input => ({ weight: input.weight,
-       price: input.price, discountPrice: input.discountPrice,ShippingWeight:input.ShippingWeight }));
+    const weightPrices = inputs.map(input => ({
+      weight: input.weight,
+      price: input.price, discountPrice: input.discountPrice, ShippingWeight: input.ShippingWeight
+    }));
     myForm.set("weightwishprice", JSON.stringify(weightPrices));
-   
+
 
     for (let i = 0; i < selectedFiles.length; i++) {
       myForm.append(`image${i}`, selectedFiles[i]);
     }
 
     try {
-      const response = await axios.put(`https://www.backend.decasys.in/api/v1/updateproduct/${_id?.id}`, myForm, {
+      const response = await axios.put(`${apiUrl}/updateproduct/${_id?.id}`, myForm, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -265,20 +267,20 @@ function UpdateProduct() {
                                   Product Name <span className="text-danger">*</span>{" "}
                                 </label>
                                 <div className="form-group">
-                                <input
-                              type="text"
-                              name="name"
-                              value={leaddata?.name}
-                              onChange={(e) =>
-                                setleaddata({
-                                  ...leaddata,
-                                  name: e.target.value,
-                                })
-                              }
-                              placeholder="Product Name"
-                              className="form-control"
-                              required="required"
-                            />
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={leaddata?.name}
+                                    onChange={(e) =>
+                                      setleaddata({
+                                        ...leaddata,
+                                        name: e.target.value,
+                                      })
+                                    }
+                                    placeholder="Product Name"
+                                    className="form-control"
+                                    required="required"
+                                  />
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
                               </div>
@@ -292,11 +294,11 @@ function UpdateProduct() {
                                   Meta Title <span className="text-danger"></span>{" "}
                                 </label>
                                 <div className="form-group">
-                                <input
-                                   type="text"
+                                  <input
+                                    type="text"
                                     name="metaTitle"
                                     value={leaddata?.metaTitle}
-                                     onChange={(e) =>
+                                    onChange={(e) =>
                                       setleaddata({
                                         ...leaddata,
                                         metaTitle: e.target.value,
@@ -304,7 +306,7 @@ function UpdateProduct() {
                                     }
                                     placeholder="Enter Meta Title"
                                     className="form-control"
-                                   
+
                                   />
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
@@ -319,7 +321,7 @@ function UpdateProduct() {
                                   Meta Keywords <span className="text-danger"></span>{" "}
                                 </label>
                                 <div className="form-group">
-                                <input
+                                  <input
                                     type="text"
                                     name="metaKey"
                                     value={leaddata?.metaKey}
@@ -331,7 +333,7 @@ function UpdateProduct() {
                                     }
                                     placeholder="Enter Meta Keywords"
                                     className="form-control"
-                                  
+
                                   />
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
@@ -346,17 +348,17 @@ function UpdateProduct() {
                                   Meta Description <span className="text-danger"></span>{" "}
                                 </label>
                                 <div className="form-group">
-                                  
-                                <textarea placeholder="Enter Meta Description"
+
+                                  <textarea placeholder="Enter Meta Description"
                                     className="form-control"
-                                     rows={4}  name="metaDes"
-                                     value={leaddata?.metaDes}
-                                     onChange={(e) =>
-                                       setleaddata({
-                                         ...leaddata,
-                                         metaDes: e.target.value,
-                                       })
-                                     } ></textarea>
+                                    rows={4} name="metaDes"
+                                    value={leaddata?.metaDes}
+                                    onChange={(e) =>
+                                      setleaddata({
+                                        ...leaddata,
+                                        metaDes: e.target.value,
+                                      })
+                                    } ></textarea>
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
                               </div>
@@ -386,7 +388,7 @@ function UpdateProduct() {
                               </div>
                             </div>
                           </div>
-                      
+
                           <div className="col-12 mob-left-right col-lg-6">
                             <div className="row">
                               <div className="col-12 mob-left-right col-lg-12">
@@ -394,20 +396,20 @@ function UpdateProduct() {
                                   Sku No. <span className="text-danger">*</span>{" "}
                                 </label>
                                 <div className="form-group">
-                                <input
-                                  type="number"
-                                  name="sku"
-                                  value={leaddata?.sku}
-                                  onChange={(e) =>
-                                    setleaddata({
-                                      ...leaddata,
-                                      sku: e.target.value,
-                                    })
-                                  }
-                                  placeholder="sku"
-                                  className="form-control"
-                                  required="required"
-                                />
+                                  <input
+                                    type="number"
+                                    name="sku"
+                                    value={leaddata?.sku}
+                                    onChange={(e) =>
+                                      setleaddata({
+                                        ...leaddata,
+                                        sku: e.target.value,
+                                      })
+                                    }
+                                    placeholder="sku"
+                                    className="form-control"
+                                    required="required"
+                                  />
 
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
@@ -420,7 +422,7 @@ function UpdateProduct() {
                               <div className="col-4 mob-left-right col-lg-4">
                                 <label htmlFor="email_id">Best Before </label>
                                 <div className="form-group">
-                                <input
+                                  <input
                                     type="date"
                                     name="bestbefore"
                                     value={leaddata?.bestbefore}
@@ -439,7 +441,7 @@ function UpdateProduct() {
                               <div className="col-4 mob-left-right col-lg-4">
                                 <label htmlFor="email_id">Product Code </label>
                                 <div className="form-group">
-                                <input
+                                  <input
                                     type="text"
                                     value={leaddata?.ProductCode}
                                     name="ProductCode"
@@ -458,7 +460,7 @@ function UpdateProduct() {
                               <div className="col-4 mob-left-right col-lg-4">
                                 <label htmlFor="email_id">UPC Code </label>
                                 <div className="form-group">
-                                <input
+                                  <input
                                     type="text"
                                     name="UPCCode"
                                     value={leaddata?.UPCCode}
@@ -494,8 +496,8 @@ function UpdateProduct() {
                                         type="text"
                                         placeholder="Weight"
                                         name={`weight${index}`}
-                                  value={input.weight || ''}
-                                  onChange={e => handleInputChange(index, e)}
+                                        value={input.weight || ''}
+                                        onChange={e => handleInputChange(index, e)}
                                       />
                                     </div>
                                     <div className="col-sm-2 row mob-left-right col-xs-12">
@@ -524,16 +526,16 @@ function UpdateProduct() {
                                         className="form-control"
                                         placeholder="Shipping Weight"
                                         name={`ShippingWeight${index}`}
-                                  value={input.ShippingWeight || ''}
-                                  onChange={e => handleInputChange(index, e)}
+                                        value={input.ShippingWeight || ''}
+                                        onChange={e => handleInputChange(index, e)}
                                       />
                                     </div>
 
                                     <div className="col-md-1 pd-top mobile-hids">
-                                <span onClick={() => RemoveItem(index)}
-                                  className="text-danger"
-                                  style={{ cursor: 'pointer' }} ><i class="fa fa-window-close" aria-hidden="true"></i></span>
-                              </div>
+                                      <span onClick={() => RemoveItem(index)}
+                                        className="text-danger"
+                                        style={{ cursor: 'pointer' }} ><i class="fa fa-window-close" aria-hidden="true"></i></span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -643,25 +645,25 @@ function UpdateProduct() {
                               <div className="col-12 mob-left-right col-lg-12">
                                 <label htmlFor="lead_source">Category </label>
                                 <div className="form-group">
-                                <select
-                                  name="category"
-                                  onChange={getsubcategory}
-                                  className="form-control"
-                                  value={leaddata?.category}
-                                  required
-                                >
-                                  <option value="">Select</option>
+                                  <select
+                                    name="category"
+                                    onChange={getsubcategory}
+                                    className="form-control"
+                                    value={leaddata?.category}
+                                    required
+                                  >
+                                    <option value="">Select</option>
 
-                                  {ProductCategory?.category?.map(
-                                    (leadsource, key) => {
-                                      return (
-                                        <option value={leadsource._id}>
-                                          {leadsource?.category_name}
-                                        </option>
-                                      );
-                                    }
-                                  )}
-                                </select>
+                                    {ProductCategory?.category?.map(
+                                      (leadsource, key) => {
+                                        return (
+                                          <option value={leadsource._id}>
+                                            {leadsource?.category_name}
+                                          </option>
+                                        );
+                                      }
+                                    )}
+                                  </select>
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
                               </div>
@@ -672,29 +674,29 @@ function UpdateProduct() {
                               <div className="col-12 mob-left-right col-lg-12">
                                 <label htmlFor="lead_source">SubCategory</label>
                                 <div className="form-group">
-                                <select value={leaddata?.subcategory}
-                                  name="subcategory"
-                                  onChange={(e) =>
-                                    setleaddata({
-                                      ...leaddata,
-                                      subcategory: e.target.value,
-                                    })
-                                  }
-                                  className="form-control"
-
-                                >
-                                  <option value="">Select</option>
-
-                                  {SubCategory?.map(
-                                    (leadsource, key) => {
-                                      return (
-                                        <option value={leadsource._id}>
-                                          {leadsource?.subcategory}
-                                        </option>
-                                      );
+                                  <select value={leaddata?.subcategory}
+                                    name="subcategory"
+                                    onChange={(e) =>
+                                      setleaddata({
+                                        ...leaddata,
+                                        subcategory: e.target.value,
+                                      })
                                     }
-                                  )}
-                                </select>
+                                    className="form-control"
+
+                                  >
+                                    <option value="">Select</option>
+
+                                    {SubCategory?.map(
+                                      (leadsource, key) => {
+                                        return (
+                                          <option value={leadsource._id}>
+                                            {leadsource?.subcategory}
+                                          </option>
+                                        );
+                                      }
+                                    )}
+                                  </select>
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
                               </div>
@@ -705,29 +707,29 @@ function UpdateProduct() {
                               <div className="col-12 mob-left-right col-lg-12">
                                 <label htmlFor="lead_source">Brand </label>
                                 <div className="form-group">
-                                <select value={leaddata?.brand}
-                                  name="brand"
-                                  onChange={(e) =>
-                                    setleaddata({
-                                      ...leaddata,
-                                      brand: e.target.value,
-                                    })
-                                  }
-                                  className="form-control"
-                                  required
-                                >
-                                  <option value="">Select</option>
-
-                                  {Brand?.map(
-                                    (leadsource, key) => {
-                                      return (
-                                        <option value={leadsource?._id}>
-                                          {leadsource?.brand}
-                                        </option>
-                                      );
+                                  <select value={leaddata?.brand}
+                                    name="brand"
+                                    onChange={(e) =>
+                                      setleaddata({
+                                        ...leaddata,
+                                        brand: e.target.value,
+                                      })
                                     }
-                                  )}
-                                </select>
+                                    className="form-control"
+                                    required
+                                  >
+                                    <option value="">Select</option>
+
+                                    {Brand?.map(
+                                      (leadsource, key) => {
+                                        return (
+                                          <option value={leadsource?._id}>
+                                            {leadsource?.brand}
+                                          </option>
+                                        );
+                                      }
+                                    )}
+                                  </select>
                                   <span className="text-danger ferror"> </span>{" "}
                                 </div>
                               </div>
@@ -735,8 +737,8 @@ function UpdateProduct() {
                           </div>
 
                           {[...Array(6)].map((_, index) => (
-                          <div className="col-md-12 mob-left-right col-xs-12" >
-                            <div className="prd-img-container">
+                            <div className="col-md-12 mob-left-right col-xs-12" >
+                              <div className="prd-img-container">
                                 <div className="row">
                                   <div className="col-md-12 pd-top mobile-hids">
                                     <label htmlFor="contact_no">
@@ -761,9 +763,9 @@ function UpdateProduct() {
                                     )}
                                   </div>
                                 </div>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
 
                           <div className="col-sm-12 col-lg-12 mb-4 mt-3">
                             <div className="col-md-12 col-xs-12 py-10 pt-10 ">

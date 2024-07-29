@@ -187,7 +187,7 @@ function App() {
                 path="/Followupleads"
                 element={<Followupleads />}
               ></Route>
-              <Route path="/Forwardleads" element={<Forwardleads />}></Route>
+              UpdateProduct<Route path="/Forwardleads" element={<Forwardleads />}></Route>
               <Route path="/Clients/:id" element={<Clients />}></Route>
               <Route path="/Registeruser" element={<Register />}></Route>
               <Route
